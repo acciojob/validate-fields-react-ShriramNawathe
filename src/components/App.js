@@ -1,53 +1,53 @@
+import React, { useState } from "react";
+import "./../styles/App.css";
 
-import React from "react";
-import './../styles/App.css';
+const LoginForm = () => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
-function LoginForm() {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
-
-  const handleLogin = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    if (username === '' || password === '') {
-      setErrorMessage('Please fill out all fields.');
+    if (!username || !password) {
+      setError("Please fill in both username and password fields.");
     } else {
-      setErrorMessage('');
-      // handle login logic here
+      // Submit the login form here.
     }
   };
-  
-const App = () => {
+
   return (
-    <div>
-        {/* Do not remove the main div */}
     <div className="login-form-container">
-      <h2>Login</h2>
-      <form onSubmit={handleLogin}>
-        <label htmlFor="username">Username:</label>
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="username">Username</label>
         <input
           type="text"
           id="username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
-        <label htmlFor="password">Password:</label>
+
+        <label htmlFor="password">Password</label>
         <input
           type="password"
           id="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button type="submit">Submit</button>
-      </form>
-      {errorMessage && (
-        <div id="errorMessage" className="error-message">
-          {errorMessage}
-        </div>
-      )}
-    </div>
-    </div>
-  )
-}
 
-export default App
+        {error && <p id="errorMessage">{error}</p>}
+
+        <button type="submit">Login</button>
+      </form>
+    </div>
+  );
+};
+
+const App = () => {
+  return (
+    <div>
+      <LoginForm />
+    </div>
+  );
+};
+
+export default App;
