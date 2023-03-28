@@ -9,7 +9,7 @@ const App = () => {
   const handleLogin = (event) => {
     event.preventDefault();
     if (!username || !password) {
-      setErrorMessage("Please fill in all fields");
+      setErrorMessage("Both username and password are required");
       return;
     }
     // Handle login logic here
@@ -28,10 +28,13 @@ const App = () => {
       <label htmlFor="username">Username:</label>
       <input type="text" id="username" value={username} onChange={handleUsernameChange} />
       <br />
+        <br />
       <label htmlFor="password">Password:</label>
       <input type="password" id="password" value={password} onChange={handlePasswordChange} />
       <br />
+        <br />
       {errorMessage && <div id="errorMessage">{errorMessage}</div>}
+<br />
       <button type="submit">Login</button>
     </form>
   );
