@@ -4,54 +4,36 @@ import "./../styles/App.css";
 const App = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
-  const handleUsernameChange = (e) => {
-    setUsername(e.target.value);
-  };
-
-  const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleLogin = (event) => {
+    event.preventDefault();
     if (!username || !password) {
-      setError("Please fill in both fields.");
-    } else {
-      // do something with username and password, e.g. send to server for authentication
-      console.log("Username:", username, "Password:", password);
+      setErrorMessage("Please fill in all fields");
+      return;
     }
+    // Handle login logic here
+  };
+
+  const handleUsernameChange = (event) => {
+    setUsername(event.target.value);
+  };
+
+  const handlePasswordChange = (event) => {
+    setPassword(event.target.value);
   };
 
   return (
-    <div className="login-form">
-      <h1>Login Form</h1>
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="username">Username:</label>
-          <input
-            type="text"
-            id="username"
-            name="username"
-            value={username}
-            onChange={handleUsernameChange}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="password">Password:</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            value={password}
-            onChange={handlePasswordChange}
-          />
-        </div>
-        {error && <div id="errorMessage">{error}</div>}
-        <button type="submit">Login</button>
-      </form>
-    </div>
+    <form onSubmit={handleLogin}>
+      <label htmlFor="username">Username:</label>
+      <input type="text" id="username" value={username} onChange={handleUsernameChange} />
+      <br />
+      <label htmlFor="password">Password:</label>
+      <input type="password" id="password" value={password} onChange={handlePasswordChange} />
+      <br />
+      {errorMessage && <div id="errorMessage">{errorMessage}</div>}
+      <button type="submit">Login</button>
+    </form>
   );
 };
 
